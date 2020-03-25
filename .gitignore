@@ -53,3 +53,6 @@ fabric.properties
 
 # Database
 database.properties
+
+# Log Files
+logs/
