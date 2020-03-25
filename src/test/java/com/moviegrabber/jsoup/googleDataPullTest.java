@@ -4,6 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -31,11 +33,11 @@ public class googleDataPullTest {
         logger.info(title);
         assertEquals("Oceans 11 - Google Search", title);
 
-
-
 //      Retrieves availabilities
-        Set<String> set = doc.getElementsByClass("i3LlFf");
+        Elements set = doc.getElementsByClass("i3LlFf");
+        String text = set.text();
 
+        logger.info(text);
 
 
     }
