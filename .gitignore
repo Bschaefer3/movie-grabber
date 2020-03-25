@@ -56,5 +56,8 @@ database.properties
 
 # Log Files
 logs/
+<<<<<<< HEAD
 
 # IML file seems to be useless
+=======
+>>>>>>> a247ed8699736ad2252c2fc013a3f35a911fb49f

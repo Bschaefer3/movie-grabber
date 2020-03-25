@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <module version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -45,3 +46,6 @@
     <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.13.1" level="project" />
   </component>
 </module>
+=======
+<module type="JAVA_MODULE" version="4" />
+>>>>>>> a247ed8699736ad2252c2fc013a3f35a911fb49f
