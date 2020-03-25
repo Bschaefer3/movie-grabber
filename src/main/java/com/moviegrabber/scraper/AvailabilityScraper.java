@@ -7,26 +7,44 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
+import java.util.List;
+
 public class AvailabilityScraper {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
     Scanner sc;
 
-    public void filterSearch(String searchTerm, int year) {
+    public List<String> filterSearch(String searchTerm, int year) throws IOException {
         String movieTitle = searchTerm.replaceAll(" ", "+");
-
+        List<String> platforms = null;
         String webPage = "";
+
         try {
             webPage = readPage(movieTitle, year);
         } catch (IOException e) {
             logger.error(e);
         }
 
+        logger.info(webPage);
+
         if (webPage.equals("")) {
-            logger.error("Webpage did not return anything...");
+            logger.error(webPage + ": Webpage did not return anything...");
         } else {
-            pullAvailability(webPage);
+            platforms = pullAvailability(webPage);
+            
+            if(platforms.size() == 0) {
+                platforms.add("No available platforms");
+            }
         }
+
+        return platforms;
     }
 
     public String readPage(String movieTitle, int year) throws IOException {
@@ -45,8 +63,19 @@ public class AvailabilityScraper {
 
     }
 
-    public void pullAvailability(String webPage) {
+    public List<String> pullAvailability(String webPage) throws IOException {
+        String url = webPage;
 
+//      Tests title
+        Document doc = Jsoup.connect(url).get();
+
+//      Retrieves available platform names
+        Elements set = doc.getElementsByClass("i3LlFf");
+        List<String> platforms = set.eachText();
+
+        logger.info(platforms);
+
+        return platforms;
     }
 
 }
