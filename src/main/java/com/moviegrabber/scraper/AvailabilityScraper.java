@@ -36,6 +36,7 @@ public class AvailabilityScraper {
         sc = new Scanner(url.openStream());
 
         StringBuilder sb = new StringBuilder();
+
         while(sc.hasNext()) {
             sb.append(sc.next());
         }
