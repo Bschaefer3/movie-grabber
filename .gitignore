@@ -56,3 +56,6 @@ database.properties
 
 # Log Files
 logs/
+
+# IML file seems to be useless
+movie-grabber.iml
