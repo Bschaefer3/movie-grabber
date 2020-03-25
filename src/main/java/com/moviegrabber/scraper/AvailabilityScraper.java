@@ -12,9 +12,6 @@ public class AvailabilityScraper {
     private final Logger logger = LogManager.getLogger(this.getClass());
     Scanner sc;
 
-    AvailabilityScraper() {
-    }
-
     public void filterSearch(String searchTerm, int year) {
         String movieTitle = searchTerm.replaceAll(" ", "+");
 
@@ -26,7 +23,7 @@ public class AvailabilityScraper {
         }
 
         if (webPage.equals("")) {
-            // Error here
+            logger.error("Webpage did not return anything...");
         } else {
             pullAvailability(webPage);
         }
