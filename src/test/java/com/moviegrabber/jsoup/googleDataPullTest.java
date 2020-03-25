@@ -40,9 +40,7 @@ public class googleDataPullTest {
 
         logger.info(platforms);
 
-//        assertNotEquals(null, platforms);
         assertEquals(5, platforms.size());
-
 
     }
 

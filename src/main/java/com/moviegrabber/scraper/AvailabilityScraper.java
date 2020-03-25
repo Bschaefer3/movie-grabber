@@ -16,26 +16,38 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type Availability scraper.
+ */
 public class AvailabilityScraper {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
+    /**
+     * The Sc.
+     */
     Scanner sc;
 
+    /**
+     * Filter search list.
+     *
+     * @param searchTerm the search term
+     * @param year       the year
+     * @return the list
+     * @throws IOException the io exception
+     */
     public List<String> filterSearch(String searchTerm, int year) throws IOException {
         String movieTitle = searchTerm.replaceAll(" ", "+");
         List<String> platforms = null;
         String webPage = "";
 
         try {
-            webPage = readPage(movieTitle, year);
+            webPage = createUrl(movieTitle, year);
         } catch (IOException e) {
             logger.error(e);
         }
 
-        logger.info(webPage);
-
         if (webPage.equals("")) {
-            logger.error(webPage + ": Webpage did not return anything...");
+            logger.error("Webpage did not return anything...");
         } else {
             platforms = pullAvailability(webPage);
             
@@ -47,6 +59,14 @@ public class AvailabilityScraper {
         return platforms;
     }
 
+    /**
+     * Read page string.
+     *
+     * @param movieTitle the movie title
+     * @param year       the year
+     * @return the string
+     * @throws IOException the io exception
+     */
     public String readPage(String movieTitle, int year) throws IOException {
         String search = "https://www.google.com/search?q=" + movieTitle + "+" + year;
 
@@ -63,6 +83,28 @@ public class AvailabilityScraper {
 
     }
 
+    /**
+     * Create url string.
+     *
+     * @param movieTitle the movie title
+     * @param year       the year
+     * @return the string
+     * @throws IOException the io exception
+     */
+    public String createUrl(String movieTitle, int year) throws IOException {
+        String search = "https://www.google.com/search?q=" + movieTitle + "+" + year;
+
+        return search;
+
+    }
+
+    /**
+     * Pull locations users can view a movie from a google search and return results as a list.
+     *
+     * @param webPage the web page
+     * @return the list
+     * @throws IOException the io exception
+     */
     public List<String> pullAvailability(String webPage) throws IOException {
         String url = webPage;
 
