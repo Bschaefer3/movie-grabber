@@ -13,7 +13,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -105,6 +104,7 @@ public class AvailabilityScraper {
      * @throws IOException the io exception
      */
     public List<String> pullAvailability(String webPage) throws IOException {
+<<<<<<< HEAD
         String url = webPage;
 
         Document doc = Jsoup.connect(url).get();
@@ -118,6 +118,24 @@ public class AvailabilityScraper {
         }
 
         platforms = platformElements.eachText();
+=======
+//      Tests title
+        Document doc = Jsoup.connect(webPage).get();
+
+//      Retrieves available platform names
+        Elements availability = doc.getElementsByClass("i3LlFf");
+        List<String> platforms = availability.eachText();
+        logger.info(platforms);
+>>>>>>> master
+
+        Elements costOnPlatform = doc.getElementsByClass("V8xno");
+        List<String> prices = costOnPlatform.eachText();
+        logger.info(prices);
+
+        List<String> information;
+        for (int i = 0; i < platforms.size(); i++) {
+            information.add(i + ": " + platforms.get(i));
+        }
 
         return platforms;
     }
