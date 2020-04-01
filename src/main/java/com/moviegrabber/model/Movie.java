@@ -2,6 +2,7 @@ package com.moviegrabber.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * The Movie data that will be returned to the api request
@@ -24,6 +25,14 @@ public class Movie {
         availability.put("Amazon Prime Video", "Unknown");
         availability.put("iTunes", "Unknown");
         availability.put("Disney+", "Unknown");
+    }
+
+    public void updateAvailability(Map<String, String> availability) {
+        for (String service: availability.keySet()) {
+            if (this.availability.containsKey(service)) {
+                this.availability.replace(service, availability.get(service));
+            }
+        }
     }
 
     public Map<String, String> getAvailability() {
