@@ -11,6 +11,6 @@
     <title>Test Page</title>
 </head>
 <body>
-hello
+<a href="movie/The+Martian">Get movie data</a>
 </body>
 </html>
