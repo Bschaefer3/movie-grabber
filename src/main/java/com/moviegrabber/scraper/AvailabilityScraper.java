@@ -112,19 +112,12 @@ public class AvailabilityScraper {
         Elements platformElements = doc.getElementsByClass("i3LlFf");
         List<String> platforms = null;
 
-        if(platformElements != null) {
-            //      Loops through the platforms adding each platform to a list
-            platforms = platformElements.eachText();
-
-        } else {
-            //      Retrieves prices on each platform + names
+        //  Retrieves platforms from other section of page
+        if(platformElements.equals(null)) {
             platformElements = doc.getElementsByClass("hl");
-
-            //      Loops through the platforms adding each platform to a list
-            platforms = platformElements.eachText();
-
         }
 
+        platforms = platformElements.eachText();
 
         return platforms;
     }
