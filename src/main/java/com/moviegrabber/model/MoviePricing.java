@@ -1,7 +1,5 @@
 package com.moviegrabber.model;
 
-import java.util.List;
-
 public class MoviePricing {
 
     private String netflix;
