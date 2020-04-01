@@ -79,13 +79,20 @@ public class googleDataPullTest {
 //      Tests title
         Document doc = Jsoup.connect(url).get();
 
-//      Retrieves available platform names
-        Elements set = doc.getElementsByClass("i3LlFf");
-        List<String> platforms = set.eachText();
+//      Retrieves prices on each platform + names
+        Elements platformElements = doc.getElementsByClass("i3LlFf");
 
-        assertEquals(5, platforms.size());
+        Elements priceElements = doc.getElementsByClass("V8xno");
 
-        logger.info(platforms);
+        List<String> platforms = platformElements.eachText();
+        List<String> prices = priceElements.eachText();
+
+        List<String> output = null;
+
+
+        assertEquals(5, prices.size());
+
+        logger.info(prices);
 
     }
 
@@ -103,8 +110,8 @@ public class googleDataPullTest {
         Document doc = Jsoup.connect(url).get();
 
 //      Get all platform availability data
-        Elements table = doc.getElementsByClass("kp-blk EyBRub fm06If Wnoohf OJXvsb");
-        logger.info(table.outerHtml());
+//        Elements table = doc.getElementsByClass("kp-blk EyBRub fm06If Wnoohf OJXvsb");
+//        logger.info(table.outerHtml());
 
 
     }
