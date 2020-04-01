@@ -1,5 +1,7 @@
 package com.moviegrabber.model;
 
+import java.util.Map;
+
 /**
  * The Movie data that will be returned to the api request
  *
@@ -10,14 +12,14 @@ public class Movie {
     private String imdbID;
     private String title;
     private String year;
-    private String availableFreeFrom;
+    private Map<String, String> availability;
 
-    public String getAvailableFreeFrom() {
-        return availableFreeFrom;
+    public Map<String, String> getAvailability() {
+        return availability;
     }
 
-    public void setAvailableFreeFrom(String availableFreeFrom) {
-        this.availableFreeFrom = availableFreeFrom;
+    public void setAvailability(Map<String, String> availability) {
+        this.availability = availability;
     }
 
     public String getImdbID() {
