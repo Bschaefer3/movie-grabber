@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 public class MovieData {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
+    private DataAggregator movieGrabber = new DataAggregator();
 
     @GET
     @Produces("application/json")
@@ -24,8 +25,7 @@ public class MovieData {
     public Response getMovie(@PathParam("param") String title) {
         String output = "";
 
-        Movie movie = new Movie();
-        movie.setTitle(title);
+        Movie movie = movieGrabber.getMovieDataByTitle(title);
 
         ObjectMapper mapper = new ObjectMapper();
 
