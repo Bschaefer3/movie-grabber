@@ -95,7 +95,6 @@ public class AvailabilityScraper {
         String search = "https://www.google.com/search?q=" + movieTitle + "+" + year;
 
         return search;
-
     }
 
     /**
@@ -108,14 +107,24 @@ public class AvailabilityScraper {
     public List<String> pullAvailability(String webPage) throws IOException {
         String url = webPage;
 
-//      Tests title
         Document doc = Jsoup.connect(url).get();
 
-//      Retrieves available platform names
-        Elements set = doc.getElementsByClass("i3LlFf");
-        List<String> platforms = set.eachText();
+        Elements platformElements = doc.getElementsByClass("i3LlFf");
+        List<String> platforms = null;
 
-        logger.info(platforms);
+        if(platformElements != null) {
+            //      Loops through the platforms adding each platform to a list
+            platforms = platformElements.eachText();
+
+        } else {
+            //      Retrieves prices on each platform + names
+            platformElements = doc.getElementsByClass("hl");
+
+            //      Loops through the platforms adding each platform to a list
+            platforms = platformElements.eachText();
+
+        }
+
 
         return platforms;
     }
