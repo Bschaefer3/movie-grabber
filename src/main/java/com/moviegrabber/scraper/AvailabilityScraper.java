@@ -1,6 +1,5 @@
 package com.moviegrabber.scraper;
 
-import com.moviegrabber.model.MoviePricing;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,9 +32,9 @@ public class AvailabilityScraper {
      * @return the list
      * @throws IOException the io exception
      */
-    public List<String> filterSearch(String searchTerm, int year) throws IOException {
+    public Map<String, String> filterSearch(String searchTerm, int year) throws IOException {
         String movieTitle = searchTerm.replaceAll(" ", "+");
-        List<String> platforms = null;
+        Map<String, String> map = new HashMap<>();
         String webPage = "";
 
         try {
@@ -47,14 +46,14 @@ public class AvailabilityScraper {
         if (webPage.equals("")) {
             logger.error("Webpage did not return anything...");
         } else {
-            platforms = pullAvailability(webPage);
+            map = pullAvailability(webPage);
             
-            if(platforms.size() == 0) {
-                platforms.add("No available platforms");
+            if(map.size() == 0) {
+                map.put("No available platforms", "");
             }
         }
 
-        return platforms;
+        return map;
     }
 
     /**
@@ -103,7 +102,7 @@ public class AvailabilityScraper {
      * @return the list
      * @throws IOException the io exception
      */
-    public List<String> pullAvailability(String webPage) throws IOException {
+    public Map<String, String> pullAvailability(String webPage) throws IOException {
 //      Tests title
         Document doc = Jsoup.connect(webPage).get();
 
@@ -112,6 +111,7 @@ public class AvailabilityScraper {
         List<String> platforms = availability.eachText();
         logger.info(platforms);
 
+//      Retrieves available platform prices
         Elements costOnPlatform = doc.getElementsByClass("V8xno");
         List<String> prices = costOnPlatform.eachText();
         logger.info(prices);
@@ -121,28 +121,7 @@ public class AvailabilityScraper {
             map.put(platforms.get(i), prices.get(i));
         }
 
-        Set<Map.Entry<String, String>> set = map.entrySet();
-        for (Map.Entry<String, String> entry:set) {
-            MoviePricing movie = new MoviePricing();
-
-            if        (entry.getKey().equals("Netflix")) {
-                movie.setNetflix(entry.getValue());
-            } else if (entry.getKey().equals("Youtube")) {
-                movie.setYoutube(entry.getValue());
-            } else if (entry.getKey().equals("Google Play Movies & TV")) {
-                movie.setGooglePlay(entry.getValue());
-            } else if (entry.getKey().equals("Vudu")) {
-                movie.setVudu(entry.getValue());
-            } else if (entry.getKey().equals("Amazon Prime Video")) {
-                movie.setAmazonPrime(entry.getValue());
-            } else if (entry.getKey().equals("Disney+")) {
-                movie.setDisney(entry.getValue());
-            } else if (entry.getKey().equals("iTunes")) {
-                movie.setiTunes(entry.getValue());
-            }
-        }
-
-        return platforms;
+        return map;
     }
 
 }
