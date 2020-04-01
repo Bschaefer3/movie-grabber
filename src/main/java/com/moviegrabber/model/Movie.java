@@ -17,13 +17,13 @@ public class Movie {
 
     public Movie() {
         availability = new HashMap<>();
-        availability.put("Netflix", "");
-        availability.put("Youtube", "");
-        availability.put("Google Play Movies & TV", "");
-        availability.put("Vudu", "");
-        availability.put("Amazon Prime Video", "");
-        availability.put("iTunes", "");
-        availability.put("Disney+", "");
+        availability.put("Netflix", "Unknown");
+        availability.put("Youtube", "Unknown");
+        availability.put("Google Play Movies & TV", "Unknown");
+        availability.put("Vudu", "Unknown");
+        availability.put("Amazon Prime Video", "Unknown");
+        availability.put("iTunes", "Unknown");
+        availability.put("Disney+", "Unknown");
     }
 
     public Map<String, String> getAvailability() {
