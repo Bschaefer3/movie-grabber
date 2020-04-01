@@ -1,19 +1,19 @@
 package com.moviegrabber.scraper;
 
+import com.moviegrabber.model.Movie;
+import com.moviegrabber.model.MoviePricing;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Scanner;
+import java.util.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
-import java.util.List;
 
 /**
  * The type Availability scraper.
@@ -117,9 +117,30 @@ public class AvailabilityScraper {
         List<String> prices = costOnPlatform.eachText();
         logger.info(prices);
 
-        List<String> information;
+        Map<String, String> map = new HashMap<>();
         for (int i = 0; i < platforms.size(); i++) {
-            information.add(i + ": " + platforms.get(i));
+            map.put(platforms.get(i), prices.get(i));
+        }
+
+        Set<Map.Entry<String, String>> set = map.entrySet();
+        for (Map.Entry<String, String> entry:set) {
+            MoviePricing movie = new MoviePricing();
+
+            if        (entry.getKey().equals("Netflix")) {
+                movie.setNetflix(entry.getValue());
+            } else if (entry.getKey().equals("Youtube")) {
+                movie.setYoutube(entry.getValue());
+            } else if (entry.getKey().equals("Google Play Movies & TV")) {
+                movie.setGooglePlay(entry.getValue());
+            } else if (entry.getKey().equals("Vudu")) {
+                movie.setVudu(entry.getValue());
+            } else if (entry.getKey().equals("Amazon Prime Video")) {
+                movie.setAmazonPrime(entry.getValue());
+            } else if (entry.getKey().equals("Disney+")) {
+                movie.setDisney(entry.getValue());
+            } else if (entry.getKey().equals("iTunes")) {
+                movie.setiTunes(entry.getValue());
+            }
         }
 
         return platforms;
