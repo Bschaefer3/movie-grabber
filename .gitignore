@@ -58,4 +58,4 @@ database.properties
 logs/
 
 # IML file seems to be useless
-movie-grabber.iml
+# movie-grabber.iml
