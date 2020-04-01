@@ -1,6 +1,5 @@
 package com.moviegrabber.scraper;
 
-import com.moviegrabber.model.Movie;
 import com.moviegrabber.model.MoviePricing;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
