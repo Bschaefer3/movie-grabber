@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
@@ -104,35 +105,29 @@ public class AvailabilityScraper {
      * @throws IOException the io exception
      */
     public List<String> pullAvailability(String webPage) throws IOException {
-<<<<<<< HEAD
+
         String url = webPage;
 
         Document doc = Jsoup.connect(url).get();
 
-        Elements platformElements = doc.getElementsByClass("i3LlFf");
-        List<String> platforms = null;
+        Elements availability = doc.getElementsByClass("i3LlFf");
+        Elements costOnPlatform = doc.getElementsByClass("V8xno");
 
-        //  Retrieves platforms from other section of page
-        if(platformElements.equals(null)) {
-            platformElements = doc.getElementsByClass("hl");
+//      Retrieves platforms from other section of page
+        if(availability.equals(null)) {
+            availability = doc.getElementsByClass("hl");
+            costOnPlatform = doc.getElementsByClass("ulLPN");
         }
 
-        platforms = platformElements.eachText();
-=======
-//      Tests title
-        Document doc = Jsoup.connect(webPage).get();
-
 //      Retrieves available platform names
-        Elements availability = doc.getElementsByClass("i3LlFf");
         List<String> platforms = availability.eachText();
         logger.info(platforms);
->>>>>>> master
 
-        Elements costOnPlatform = doc.getElementsByClass("V8xno");
+//      Retrieves available platform prices
         List<String> prices = costOnPlatform.eachText();
         logger.info(prices);
 
-        List<String> information;
+        List<String> information = new ArrayList<String>();
         for (int i = 0; i < platforms.size(); i++) {
             information.add(i + ": " + platforms.get(i));
         }
