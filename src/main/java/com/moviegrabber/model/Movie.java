@@ -1,5 +1,6 @@
 package com.moviegrabber.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -13,6 +14,17 @@ public class Movie {
     private String title;
     private String year;
     private Map<String, String> availability;
+
+    public Movie() {
+        availability = new HashMap<>();
+        availability.put("Netflix", "");
+        availability.put("Youtube", "");
+        availability.put("Google Play Movies & TV", "");
+        availability.put("Vudu", "");
+        availability.put("Amazon Prime Video", "");
+        availability.put("iTunes", "");
+        availability.put("Disney+", "");
+    }
 
     public Map<String, String> getAvailability() {
         return availability;
