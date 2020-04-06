@@ -6,9 +6,6 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -92,7 +89,6 @@ public class AvailabilityScraper {
         String search = "https://www.google.com/search?q=" + movieTitle + "+" + year;
 
         return search;
-
     }
 
     /**
@@ -106,17 +102,27 @@ public class AvailabilityScraper {
 //      Tests title
         Document doc = Jsoup.connect(webPage).get();
 
-//      Retrieves available platform names
         Elements availability = doc.getElementsByClass("i3LlFf");
+        Elements costOnPlatform = doc.getElementsByClass("V8xno");
+
+//      Retrieves platforms from other section of page
+        if(availability.equals(null)) {
+            availability = doc.getElementsByClass("hl");
+            costOnPlatform = doc.getElementsByClass("ulLPN");
+        }
+
+//      Retrieves available platform names
         List<String> platforms = availability.eachText();
         logger.info(platforms);
 
 //      Retrieves available platform prices
-        Elements costOnPlatform = doc.getElementsByClass("V8xno");
         List<String> prices = costOnPlatform.eachText();
         logger.info(prices);
 
         Map<String, String> map = new HashMap<>();
+        logger.info(prices);
+
+        List<String> information = new ArrayList<String>();
         for (int i = 0; i < platforms.size(); i++) {
             map.put(platforms.get(i), prices.get(i));
         }
