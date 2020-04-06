@@ -21,6 +21,18 @@ public class AvailabilityScraper {
      */
     Scanner sc;
 
+    public Map<String, String> getAvailabilityByTitle(String searchTerm, int year) {
+        Map<String, String> map = new HashMap<>();
+
+        try {
+            map = this.filterSearch(searchTerm, year);
+        } catch (IOException e) {
+            logger.error(e);
+        }
+
+        return map;
+    }
+
     /**
      * Filter search list.
      *
@@ -34,11 +46,7 @@ public class AvailabilityScraper {
         Map<String, String> map = new HashMap<>();
         String webPage = "";
 
-        try {
-            webPage = createUrl(movieTitle, year);
-        } catch (IOException e) {
-            logger.error(e);
-        }
+        webPage = createUrl(movieTitle, year);
 
         if (webPage.equals("")) {
             logger.error("Webpage did not return anything...");

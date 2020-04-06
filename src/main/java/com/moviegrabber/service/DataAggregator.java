@@ -16,7 +16,8 @@ public class DataAggregator {
         movie.setTitle(omdbData.getTitle());
         movie.setImdbID(omdbData.getImdbID());
         movie.setYear(omdbData.getYear());
-        movie.setAvailableFreeFrom("Netflix");
+
+        //movie.setAvailableFreeFrom("Netflix");
 
         return movie;
     }
