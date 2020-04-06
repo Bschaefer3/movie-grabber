@@ -43,11 +43,7 @@ public class AvailabilityScraper {
         if (webPage.equals("")) {
             logger.error("Webpage did not return anything...");
         } else {
-            try {
-                map = pullAvailability(webPage);
-            } catch (IOException e) {
-                logger.error(e);
-            }
+            map = pullAvailability(webPage);
 
             if(map.size() == 0) {
                 map.put("No available platforms", "");
@@ -78,9 +74,15 @@ public class AvailabilityScraper {
      * @return the list
      * @throws IOException the io exception
      */
-    public Map<String, String> pullAvailability(String webPage) throws IOException {
+    public Map<String, String> pullAvailability(String webPage) {
 //      Tests title
-        Document doc = Jsoup.connect(webPage).get();
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(webPage).get();
+        } catch(IOException e) {
+            logger.error(e);
+        }
+
 
         Elements availability = doc.getElementsByClass("i3LlFf");
         Elements costOnPlatform = doc.getElementsByClass("V8xno");

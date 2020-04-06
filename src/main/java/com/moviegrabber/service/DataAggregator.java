@@ -12,7 +12,7 @@ public class DataAggregator {
     private OMDBDao dao = new OMDBDao();
     private AvailabilityScraper availability = new AvailabilityScraper();
 
-    public Movie getMovieDataByTitle(String title) throws IOException {
+    public Movie getMovieDataByTitle(String title) {
 
         com.omdb.Movie omdbData = dao.getMovieByTitle(title);
 

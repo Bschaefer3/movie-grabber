@@ -23,7 +23,7 @@ public class MovieData {
     @GET
     @Produces("application/json")
     @Path("/{param}")
-    public Response getMovie(@PathParam("param") String title) throws IOException {
+    public Response getMovie(@PathParam("param") String title) {
         String output = "";
 
         Movie movie = movieGrabber.getMovieDataByTitle(title);
