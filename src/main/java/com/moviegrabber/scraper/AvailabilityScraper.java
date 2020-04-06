@@ -131,8 +131,6 @@ public class AvailabilityScraper {
         logger.info(prices);
 
         Map<String, String> map = new HashMap<>();
-
-        List<String> information = new ArrayList<String>();
         for (int i = 0; i < platforms.size(); i++) {
             map.put(platforms.get(i), prices.get(i));
         }
