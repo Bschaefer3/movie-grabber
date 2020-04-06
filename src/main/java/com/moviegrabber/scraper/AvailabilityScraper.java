@@ -5,16 +5,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.util.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
-import java.util.List;
 
 /**
  * The type Availability scraper.
@@ -35,9 +29,9 @@ public class AvailabilityScraper {
      * @return the list
      * @throws IOException the io exception
      */
-    public List<String> filterSearch(String searchTerm, int year) throws IOException {
+    public Map<String, String> filterSearch(String searchTerm, int year) throws IOException {
         String movieTitle = searchTerm.replaceAll(" ", "+");
-        List<String> platforms = null;
+        Map<String, String> map = new HashMap<>();
         String webPage = "";
 
         try {
@@ -49,14 +43,14 @@ public class AvailabilityScraper {
         if (webPage.equals("")) {
             logger.error("Webpage did not return anything...");
         } else {
-            platforms = pullAvailability(webPage);
+            map = pullAvailability(webPage);
             
-            if(platforms.size() == 0) {
-                platforms.add("No available platforms");
+            if(map.size() == 0) {
+                map.put("No available platforms", "");
             }
         }
 
-        return platforms;
+        return map;
     }
 
     /**
@@ -104,11 +98,9 @@ public class AvailabilityScraper {
      * @return the list
      * @throws IOException the io exception
      */
-    public List<String> pullAvailability(String webPage) throws IOException {
-
-        String url = webPage;
-
-        Document doc = Jsoup.connect(url).get();
+    public Map<String, String> pullAvailability(String webPage) throws IOException {
+//      Tests title
+        Document doc = Jsoup.connect(webPage).get();
 
         Elements availability = doc.getElementsByClass("i3LlFf");
         Elements costOnPlatform = doc.getElementsByClass("V8xno");
@@ -127,12 +119,15 @@ public class AvailabilityScraper {
         List<String> prices = costOnPlatform.eachText();
         logger.info(prices);
 
+        Map<String, String> map = new HashMap<>();
+        logger.info(prices);
+
         List<String> information = new ArrayList<String>();
         for (int i = 0; i < platforms.size(); i++) {
-            information.add(i + ": " + platforms.get(i));
+            map.put(platforms.get(i), prices.get(i));
         }
 
-        return platforms;
+        return map;
     }
 
 }

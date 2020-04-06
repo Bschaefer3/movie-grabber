@@ -1,5 +1,9 @@
 package com.moviegrabber.model;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * The Movie data that will be returned to the api request
  *
@@ -10,14 +14,33 @@ public class Movie {
     private String imdbID;
     private String title;
     private String year;
-    private String availableFreeFrom;
+    private Map<String, String> availability;
 
-    public String getAvailableFreeFrom() {
-        return availableFreeFrom;
+    public Movie() {
+        availability = new HashMap<>();
+        availability.put("Netflix", "Unknown");
+        availability.put("Youtube", "Unknown");
+        availability.put("Google Play Movies & TV", "Unknown");
+        availability.put("Vudu", "Unknown");
+        availability.put("Amazon Prime Video", "Unknown");
+        availability.put("iTunes", "Unknown");
+        availability.put("Disney+", "Unknown");
     }
 
-    public void setAvailableFreeFrom(String availableFreeFrom) {
-        this.availableFreeFrom = availableFreeFrom;
+    public void updateAvailability(Map<String, String> availability) {
+        for (String service: availability.keySet()) {
+            if (this.availability.containsKey(service)) {
+                this.availability.replace(service, availability.get(service));
+            }
+        }
+    }
+
+    public Map<String, String> getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(Map<String, String> availability) {
+        this.availability = availability;
     }
 
     public String getImdbID() {
