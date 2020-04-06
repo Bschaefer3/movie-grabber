@@ -23,7 +23,7 @@ public class googleDataPullTest {
     @Test
     public void getSidePlatformsTest() throws IOException {
         AvailabilityScraper scraper = new AvailabilityScraper();
-        Map<String, String> platforms = scraper.filterSearch("War of the Planet of the Apes", 2017);
+        Map<String, String> platforms = scraper.getAvailabilityByTitle("War of the Planet of the Apes", 2017);
         logger.info("Platforms and price" + platforms);
         assertEquals(5, platforms.size());
     }
@@ -35,7 +35,7 @@ public class googleDataPullTest {
     @Test
     public void getTopPlatformsTest() throws IOException {
         AvailabilityScraper scraper = new AvailabilityScraper();
-        Map<String, String> platforms = scraper.filterSearch("Jumanji: The next level", 2019);
+        Map<String, String> platforms = scraper.getAvailabilityByTitle("Jumanji: The next level", 2019);
         logger.info("Platforms" + platforms);
         assertEquals(4, platforms.size());
     }
