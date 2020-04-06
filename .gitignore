@@ -56,3 +56,6 @@ database.properties
 
 # Log Files
 logs/
+
+# Removing the iml
+movie-grabber.iml
