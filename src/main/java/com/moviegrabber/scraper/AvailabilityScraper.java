@@ -21,18 +21,6 @@ public class AvailabilityScraper {
      */
     Scanner sc;
 
-    public Map<String, String> getAvailabilityByTitle(String searchTerm, int year) {
-        Map<String, String> map = new HashMap<>();
-
-        try {
-            map = this.filterSearch(searchTerm, year);
-        } catch (IOException e) {
-            logger.error(e);
-        }
-
-        return map;
-    }
-
     /**
      * Filter search list.
      *
@@ -41,19 +29,26 @@ public class AvailabilityScraper {
      * @return the list
      * @throws IOException the io exception
      */
-    public Map<String, String> filterSearch(String searchTerm, int year) throws IOException {
+    public Map<String, String> getAvailabilityByTitle(String searchTerm, int year) {
         String movieTitle = searchTerm.replaceAll(" ", "+");
         Map<String, String> map = new HashMap<>();
         String webPage = "";
 
-        String url = createUrl(movieTitle, year);
-        webPage = readPage(url);
+        try {
+            webPage = createUrl(movieTitle, year);
+        } catch (IOException e) {
+            logger.error(e);
+        }
 
         if (webPage.equals("")) {
             logger.error("Webpage did not return anything...");
         } else {
-            map = pullAvailability(webPage);
-            
+            try {
+                map = pullAvailability(webPage);
+            } catch (IOException e) {
+                logger.error(e);
+            }
+
             if(map.size() == 0) {
                 map.put("No available platforms", "");
             }
@@ -65,11 +60,14 @@ public class AvailabilityScraper {
     /**
      * Read page string.
      *
-     * @param search the google search url
+     * @param movieTitle the movie title
+     * @param year       the year
      * @return the string
      * @throws IOException the io exception
      */
-    public String readPage(String search) throws IOException {
+    public String readPage(String movieTitle, int year) throws IOException {
+        String search = "https://www.google.com/search?q=" + movieTitle + "+" + year;
+
         URL url = new URL(search);
         sc = new Scanner(url.openStream());
 
@@ -92,7 +90,9 @@ public class AvailabilityScraper {
      * @throws IOException the io exception
      */
     public String createUrl(String movieTitle, int year) throws IOException {
-        return "https://www.google.com/search?q=" + movieTitle + "+" + year;
+        String search = "https://www.google.com/search?q=" + movieTitle + "+" + year;
+
+        return search;
     }
 
     /**
@@ -111,10 +111,9 @@ public class AvailabilityScraper {
 
 //      Retrieves platforms from other section of page
         if(availability.equals(null)) {
-            availability = doc.getElementsByClass("Eegi6c");
+            availability = doc.getElementsByClass("hl");
             costOnPlatform = doc.getElementsByClass("ulLPN");
         }
-
 
 //      Retrieves available platform names
         List<String> platforms = availability.eachText();
@@ -133,6 +132,7 @@ public class AvailabilityScraper {
 
         Map<String, String> map = new HashMap<>();
 
+        List<String> information = new ArrayList<String>();
         for (int i = 0; i < platforms.size(); i++) {
             map.put(platforms.get(i), prices.get(i));
         }
