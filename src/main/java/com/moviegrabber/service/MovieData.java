@@ -13,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import java.util.Map;
+import java.io.IOException;
 
 @Path("/movie")
 public class MovieData {
@@ -23,7 +24,7 @@ public class MovieData {
     @GET
     @Produces("application/json")
     @Path("/{param}")
-    public Response getMovie(@PathParam("param") String title) {
+    public Response getMovie(@PathParam("param") String title) throws IOException {
         String output = "";
 
         Movie movie = movieGrabber.getMovieDataByTitle(title);
@@ -42,7 +43,7 @@ public class MovieData {
     @GET
     @Produces("text/html")
     @Path("/{param}")
-    public Response getMovieHTML(@PathParam("param") String title) {
+    public Response getMovieHTML(@PathParam("param") String title) throws IOException {
         String output = "<ul>";
 
         Movie movie = movieGrabber.getMovieDataByTitle(title);

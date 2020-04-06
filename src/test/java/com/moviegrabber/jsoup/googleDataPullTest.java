@@ -24,6 +24,7 @@ public class googleDataPullTest {
     public void getSidePlatformsTest() throws IOException {
         AvailabilityScraper scraper = new AvailabilityScraper();
         Map<String, String> platforms = scraper.getAvailabilityByTitle("War of the Planet of the Apes", 2017);
+
         logger.info("Platforms and price" + platforms);
         assertEquals(5, platforms.size());
     }
