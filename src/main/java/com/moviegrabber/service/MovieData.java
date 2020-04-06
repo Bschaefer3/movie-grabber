@@ -43,7 +43,7 @@ public class MovieData {
     @GET
     @Produces("text/html")
     @Path("/{param}")
-    public Response getMovieHTML(@PathParam("param") String title) throws IOException {
+    public Response getMovieHTML(@PathParam("param") String title) {
         String output = "<ul>";
 
         Movie movie = movieGrabber.getMovieDataByTitle(title);
