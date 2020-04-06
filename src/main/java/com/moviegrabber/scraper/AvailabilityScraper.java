@@ -58,30 +58,6 @@ public class AvailabilityScraper {
     }
 
     /**
-     * Read page string.
-     *
-     * @param movieTitle the movie title
-     * @param year       the year
-     * @return the string
-     * @throws IOException the io exception
-     */
-    public String readPage(String movieTitle, int year) throws IOException {
-        String search = "https://www.google.com/search?q=" + movieTitle + "+" + year;
-
-        URL url = new URL(search);
-        sc = new Scanner(url.openStream());
-
-        StringBuilder sb = new StringBuilder();
-
-        while(sc.hasNext()) {
-            sb.append(sc.next());
-        }
-
-        return sb.toString();
-
-    }
-
-    /**
      * Create url string.
      *
      * @param movieTitle the movie title
