@@ -115,18 +115,24 @@ public class AvailabilityScraper {
             costOnPlatform = doc.getElementsByClass("ulLPN");
         }
 
+
 //      Retrieves available platform names
         List<String> platforms = availability.eachText();
         logger.info(platforms);
 
 //      Retrieves available platform prices
         List<String> prices = costOnPlatform.eachText();
+
+        for (int i = 0; i < prices.size(); i++) {
+            if (!prices.get(i).equals("Subscription")) {
+                prices.set(i, prices.get(i).substring(6));
+            }
+        }
+
         logger.info(prices);
 
         Map<String, String> map = new HashMap<>();
-        logger.info(prices);
 
-        List<String> information = new ArrayList<String>();
         for (int i = 0; i < platforms.size(); i++) {
             map.put(platforms.get(i), prices.get(i));
         }

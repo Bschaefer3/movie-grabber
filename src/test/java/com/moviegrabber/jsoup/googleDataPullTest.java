@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,8 +23,8 @@ public class googleDataPullTest {
     @Test
     public void getSidePlatformsTest() throws IOException {
         AvailabilityScraper scraper = new AvailabilityScraper();
-        List<String> platforms = scraper.filterSearch("War of the Planet of the Apes", 2017);
-        logger.info("Platforms" + platforms);
+        Map<String, String> platforms = scraper.filterSearch("War of the Planet of the Apes", 2017);
+        logger.info("Platforms and price" + platforms);
         assertEquals(5, platforms.size());
     }
 
@@ -34,7 +35,7 @@ public class googleDataPullTest {
     @Test
     public void getTopPlatformsTest() throws IOException {
         AvailabilityScraper scraper = new AvailabilityScraper();
-        List<String> platforms = scraper.filterSearch("Jumanji: The next level", 2019);
+        Map<String, String> platforms = scraper.filterSearch("Jumanji: The next level", 2019);
         logger.info("Platforms" + platforms);
         assertEquals(4, platforms.size());
     }
