@@ -4,14 +4,22 @@ import com.moviegrabber.model.Movie;
 import com.moviegrabber.scraper.AvailabilityScraper;
 import com.omdb.OMDBDao;
 
-import java.io.IOException;
 import java.util.Map;
 
+/**
+ * Aggregates the movie data from omdb and google
+ */
 public class DataAggregator {
 
     private OMDBDao dao = new OMDBDao();
     private AvailabilityScraper availability = new AvailabilityScraper();
 
+    /**
+     * Gets movie data by title.
+     *
+     * @param title the movie title
+     * @return the movie data
+     */
     public Movie getMovieDataByTitle(String title) {
 
         com.omdb.Movie omdbData = dao.getMovieByTitle(title);
