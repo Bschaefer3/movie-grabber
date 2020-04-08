@@ -36,7 +36,7 @@
 
         const jsonFromServer = () => {
 
-            let url = "/movie_grabber_war/movie/The+Martian";
+            let url = "/movie_grabber_war/movie/imdbid=tt3659388";
             const callback = data => {
                 data = JSON.parse(data);
                 console.table(data);
@@ -47,7 +47,7 @@
 
         const htmlFromServer = () => {
 
-            let url = "/movie_grabber_war/movie/The+Martian";
+            let url = "/movie_grabber_war/movie/imdbid=tt3659388";
             const callback = data => {
                 console.log(data);
             }
@@ -58,6 +58,6 @@
     </script>
 </head>
 <body>
-<a href="movie/The+Martian">Get movie data</a>
+<a href="movie/title=The+Martian">Get movie data</a>
 </body>
 </html>
