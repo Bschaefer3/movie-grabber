@@ -1,6 +1,5 @@
 package com.moviegrabber.service;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moviegrabber.model.Movie;
@@ -13,14 +12,22 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import java.util.Map;
-import java.io.IOException;
 
+/**
+ * Processes api requests to get movie data
+ */
 @Path("/movie")
 public class MovieData {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
     private DataAggregator movieGrabber = new DataAggregator();
 
+    /**
+     * Gets movie data in a json format.
+     *
+     * @param title the movie title
+     * @return the movie data
+     */
     @GET
     @Produces("application/json")
     @Path("/{param}")
@@ -40,6 +47,12 @@ public class MovieData {
         return Response.status(200).entity(output).build();
     }
 
+    /**
+     * Gets movie data in an html return format.
+     *
+     * @param title the title of the movie
+     * @return the movie data
+     */
     @GET
     @Produces("text/html")
     @Path("/{param}")
