@@ -5,8 +5,9 @@
 
 ## 3/25
 * Created project layout
-* Implemented IMDB dao
+* Implemented OMDB dao
 * Created tests for availability scraper class
+* Created data aggregator to
 
 ## 4/1
 * Created and completed Movie class
