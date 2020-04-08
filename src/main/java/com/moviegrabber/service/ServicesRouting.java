@@ -5,6 +5,9 @@ import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Sets the path for the services to follow
+ */
 //Defines the base URI for all resource URIs.
 @ApplicationPath("/")
 
