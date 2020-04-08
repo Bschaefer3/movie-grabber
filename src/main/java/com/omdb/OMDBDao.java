@@ -28,7 +28,7 @@ public class OMDBDao {
 
         Client client = ClientBuilder.newClient();
         WebTarget target =
-                client.target("http://www.omdbapi.com/?apikey=a59d3c7e&t=" + title);
+                client.target("http://www.omdbapi.com/?apikey=cc0c587&t=" + title);
         String response = target.request(MediaType.APPLICATION_JSON).get(String.class);
 
         ObjectMapper mapper = new ObjectMapper();
