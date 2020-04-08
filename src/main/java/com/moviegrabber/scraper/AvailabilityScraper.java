@@ -74,6 +74,8 @@ public class AvailabilityScraper {
         Elements availability = doc.getElementsByClass("i3LlFf");
         Elements costOnPlatform = doc.getElementsByClass("V8xno");
 
+        logger.info(availability);
+
 //      Retrieves platforms from other section of page
         if(availability.equals(null)) {
             availability = doc.getElementsByClass("hl");
