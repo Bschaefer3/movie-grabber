@@ -63,8 +63,10 @@ public class AvailabilityScraper {
      * @return the list
      */
     public Map<String, String> pullAvailability(String webPage) {
+
 //      Tests title
         Document doc = null;
+
         try {
             doc = Jsoup.connect(webPage).get();
         } catch(IOException e) {
@@ -75,7 +77,7 @@ public class AvailabilityScraper {
         Elements costOnPlatform = doc.getElementsByClass("V8xno");
 
 //      Retrieves platforms from other section of page
-        if(availability.equals(null)) {
+        if(availability.isEmpty()) {
             availability = doc.getElementsByClass("hl");
             costOnPlatform = doc.getElementsByClass("ulLPN");
         }

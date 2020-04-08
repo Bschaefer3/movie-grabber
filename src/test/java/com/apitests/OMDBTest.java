@@ -2,7 +2,7 @@ package com.apitests;
 
 import com.omdb.Movie;
 import com.omdb.OMDBDao;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
