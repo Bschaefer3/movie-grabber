@@ -15,10 +15,9 @@ determine where they can watch their movies and for what price.
 ### API Documentation
 https://app.swaggerhub.com/apis-docs/Bschaefer3/movie-grabber/1.0.0
 
-**Main Features**:
-
-* Availability 
-* Release Date 
-* Where to Watch (Netflix, Hulu, etc)
-
+### Project Technologies
+* JSoup - To scrape availability data from a google search
+* Swagger - For API documentation
+* JUnit - To run unit tests
+* RESTful Services - OMDB to get relevant movie data
 
