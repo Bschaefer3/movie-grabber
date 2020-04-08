@@ -4,25 +4,21 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 /**
- * The type Availability scraper.
+ * The Availability Scraper Class - Scans google search for prices and location of movies
  */
 public class AvailabilityScraper {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
-    /**
-     * The Sc.
-     */
     Scanner sc;
 
     /**
-     * Filter search list.
+     * Get's availability by title, master method that calls on other methods
      *
      * @param searchTerm the search term
      * @param year       the year
@@ -68,7 +64,7 @@ public class AvailabilityScraper {
     }
 
     /**
-     * Pull locations users can view a movie from a google search and return results as a list.
+     * Pull locations users can view a movie from a google search and return results as a map.
      *
      * @param webPage the web page
      * @return the list
@@ -82,7 +78,6 @@ public class AvailabilityScraper {
         } catch(IOException e) {
             logger.error(e);
         }
-
 
         Elements availability = doc.getElementsByClass("i3LlFf");
         Elements costOnPlatform = doc.getElementsByClass("V8xno");
@@ -100,6 +95,7 @@ public class AvailabilityScraper {
 //      Retrieves available platform prices
         List<String> prices = costOnPlatform.eachText();
 
+//      Checks to see if service is subscription, if not -- grabs price
         for (int i = 0; i < prices.size(); i++) {
             if (!prices.get(i).equals("Subscription")) {
                 prices.set(i, prices.get(i).substring(6));
@@ -108,6 +104,7 @@ public class AvailabilityScraper {
 
         logger.info(prices);
 
+//      Inserts prices into map
         Map<String, String> map = new HashMap<>();
         for (int i = 0; i < platforms.size(); i++) {
             map.put(platforms.get(i), prices.get(i));
