@@ -15,7 +15,6 @@ import org.jsoup.select.Elements;
 public class AvailabilityScraper {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
-    Scanner sc;
 
     /**
      * Get's availability by title, master method that calls on other methods
@@ -23,18 +22,13 @@ public class AvailabilityScraper {
      * @param searchTerm the search term
      * @param year       the year
      * @return the list
-     * @throws IOException the io exception
      */
     public Map<String, String> getAvailabilityByTitle(String searchTerm, int year) {
         String movieTitle = searchTerm.replaceAll(" ", "+");
         Map<String, String> map = new HashMap<>();
         String webPage = "";
 
-        try {
-            webPage = createUrl(movieTitle, year);
-        } catch (IOException e) {
-            logger.error(e);
-        }
+        webPage = createUrl(movieTitle, year);
 
         if (webPage.equals("")) {
             logger.error("Webpage did not return anything...");
@@ -55,9 +49,8 @@ public class AvailabilityScraper {
      * @param movieTitle the movie title
      * @param year       the year
      * @return the string
-     * @throws IOException the io exception
      */
-    public String createUrl(String movieTitle, int year) throws IOException {
+    public String createUrl(String movieTitle, int year) {
         String search = "https://www.google.com/search?q=" + movieTitle + "+" + year;
 
         return search;
@@ -68,7 +61,6 @@ public class AvailabilityScraper {
      *
      * @param webPage the web page
      * @return the list
-     * @throws IOException the io exception
      */
     public Map<String, String> pullAvailability(String webPage) {
 //      Tests title
