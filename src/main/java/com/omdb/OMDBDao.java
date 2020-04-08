@@ -26,9 +26,32 @@ public class OMDBDao {
     public Movie getMovieByTitle(String title) {
         title = title.replaceAll(" ", "+");
 
+        String queryParamater = "t=" + title;
+
+        Movie movie = getMovieFromAPI(queryParamater);
+
+        return movie;
+    }
+
+    /**
+     * Gets movie by imdb ID
+     *
+     * @param imdbId the imdb ID
+     * @return the movie
+     */
+    public Movie getMovieById(String imdbId) {
+
+        String queryParamater = "i=" + imdbId;
+
+        Movie movie = getMovieFromAPI(queryParamater);
+
+        return movie;
+    }
+
+    public Movie getMovieFromAPI(String queryParamater) {
         Client client = ClientBuilder.newClient();
         WebTarget target =
-                client.target("http://www.omdbapi.com/?apikey=cc0c587&t=" + title);
+                client.target("http://www.omdbapi.com/?apikey=cc0c587&" + queryParamater);
         String response = target.request(MediaType.APPLICATION_JSON).get(String.class);
 
         ObjectMapper mapper = new ObjectMapper();
