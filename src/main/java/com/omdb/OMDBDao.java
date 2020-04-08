@@ -10,10 +10,19 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 
+/**
+ * The dao to access the omdb api
+ */
 public class OMDBDao {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
+    /**
+     * Gets movie by title.
+     *
+     * @param title the title
+     * @return the movie
+     */
     public Movie getMovieByTitle(String title) {
         title = title.replaceAll(" ", "+");
 
