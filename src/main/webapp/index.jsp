@@ -59,6 +59,7 @@
 </head>
 <body>
 <a href="https://github.com/Bschaefer3/movie-grabber">Link to Github</a>
+<a href="https://app.swaggerhub.com/apis-docs/Bschaefer3/movie-grabber/1.0.0">Link to API Documentation</a>
 <a href="movie/title=The+Martian">Get movie data</a>
 </body>
 </html>
