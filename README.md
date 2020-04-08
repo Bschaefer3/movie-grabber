@@ -12,6 +12,9 @@ people to determine which movies are available.
 Movie Grabber is an API that will solve those problems and allow a user to 
 determine where they can watch their movies and for what price.
 
+### API Documentation
+https://app.swaggerhub.com/apis-docs/Bschaefer3/movie-grabber/1.0.0
+
 **Main Features**:
 
 * Availability 
