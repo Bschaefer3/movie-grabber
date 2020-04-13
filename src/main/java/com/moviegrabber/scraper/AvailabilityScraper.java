@@ -76,8 +76,6 @@ public class AvailabilityScraper {
         Elements availability = doc.getElementsByClass("i3LlFf");
         Elements costOnPlatform = doc.getElementsByClass("V8xno");
 
-        logger.info(availability);
-
 //      Retrieves platforms from other section of page
         if(availability.isEmpty()) {
             availability = doc.getElementsByClass("hl");
@@ -86,7 +84,6 @@ public class AvailabilityScraper {
 
 //      Retrieves available platform names
         List<String> platforms = availability.eachText();
-        logger.info(platforms);
 
 //      Retrieves available platform prices
         List<String> prices = costOnPlatform.eachText();
@@ -98,7 +95,6 @@ public class AvailabilityScraper {
             }
         }
 
-        logger.info(prices);
 
 //      Inserts prices into map
         Map<String, String> map = new HashMap<>();
