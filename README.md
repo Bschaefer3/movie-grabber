@@ -20,4 +20,6 @@ https://app.swaggerhub.com/apis-docs/Bschaefer3/movie-grabber/1.0.0
 * Swagger - For API documentation
 * JUnit - To run unit tests
 * RESTful Services - OMDB to get relevant movie data
-
+* Jersey/JAX-RS - For creating our web service
+* Jackson - To convert java objects to JSON and vice versa
+* Log4J - For error logging
