@@ -11,8 +11,10 @@
     <title>Movie Grabber</title>
 
     <script>
-        const makeAJAXRequest = (url, callback, contentType) => {
+        const makeAJAXRequest = (parameter, callback, contentType) => {
             let xhr = new XMLHttpRequest();
+
+            let url = "/movie_grabber_war/movies/" + parameter;
 
             let method = "get";
 
@@ -36,42 +38,38 @@
 
         const jsonFromServer = (parameter = "imdbid=tt3659388") => {
 
-            let url = "/movie_grabber_war/movies/" + parameter;
             const callback = data => {
                 data = JSON.parse(data);
                 console.table(data);
             }
-            makeAJAXRequest(url, callback, 'application/json');
+            makeAJAXRequest(parameter, callback, 'application/json');
 
         }
 
         const htmlFromServer = (parameter = "imdbid=tt3659388") => {
 
-            let url = "/movie_grabber_war/movies/" + parameter;
             const callback = data => {
                 console.log(data);
             }
-            makeAJAXRequest(url, callback, 'text/html');
+            makeAJAXRequest(parameter, callback, 'text/html');
 
         }
 
         const xmlFromServer = (parameter = "imdbid=tt3659388") => {
 
-            let url = "/movie_grabber_war/movies/" + parameter;
             const callback = data => {
                 console.log(data);
             }
-            makeAJAXRequest(url, callback, 'text/xml');
+            makeAJAXRequest(parameter, callback, 'text/xml');
 
         }
 
         const plainTextFromServer = (parameter = "imdbid=tt3659388") => {
 
-            let url = "/movie_grabber_war/movies/" + parameter;
             const callback = data => {
                 console.log(data);
             }
-            makeAJAXRequest(url, callback, 'text/plain');
+            makeAJAXRequest(parameter, callback, 'text/plain');
 
         }
 
