@@ -1,5 +1,6 @@
 package com.omdb;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.annotation.Generated;
@@ -9,6 +10,7 @@ import java.util.List;
  * The type Movie.
  */
 @Generated("com.robohorse.robopojogenerator")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie{
 
 	@JsonProperty("Metascore")

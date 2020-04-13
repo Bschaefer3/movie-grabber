@@ -23,8 +23,11 @@ public class AvailabilityScraper {
      * @param year       the year
      * @return the list
      */
-    public Map<String, String> getAvailabilityByTitle(String searchTerm, int year) {
+    public Map<String, String> getAvailabilityByTitle(String searchTerm, String year) {
         String movieTitle = searchTerm.replaceAll(" ", "+");
+
+        year = year.substring(0,4);
+
         Map<String, String> map = new HashMap<>();
         String webPage = "";
 
@@ -50,7 +53,7 @@ public class AvailabilityScraper {
      * @param year       the year
      * @return the string
      */
-    public String createUrl(String movieTitle, int year) {
+    public String createUrl(String movieTitle, String year) {
         String search = "https://www.google.com/search?q=" + movieTitle + "+" + year;
 
         return search;

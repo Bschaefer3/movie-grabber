@@ -235,7 +235,7 @@ public class DataAggregator {
         movie.setImdbID(omdbData.getImdbID());
         movie.setYear(omdbData.getYear());
 
-        Map<String, String> pricing = availability.getAvailabilityByTitle(movie.getTitle(), Integer.parseInt(movie.getYear()));
+        Map<String, String> pricing = availability.getAvailabilityByTitle(movie.getTitle(), movie.getYear());
 
         movie.updateAvailability(pricing);
 
