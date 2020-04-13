@@ -2,6 +2,7 @@ package com.moviegrabber.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.moviegrabber.model.Movie;
 import com.moviegrabber.scraper.AvailabilityScraper;
 import com.omdb.OMDBDao;
@@ -79,6 +80,34 @@ public class DataAggregator {
     }
 
     /**
+     * Gets movie xml by title.
+     *
+     * @param title the title
+     * @return the movie xml by title
+     */
+    public String getMovieXmlByTitle(String title) {
+        com.omdb.Movie omdbData = dao.getMovieByTitle(title);
+
+        String movieXml = convertMovieToXml(omdbData);
+
+        return movieXml;
+    }
+
+    /**
+     * Gets movie xml by imdb id.
+     *
+     * @param imdbId the imdb id
+     * @return the movie xml by imdb id
+     */
+    public String getMovieXmlByImdbId(String imdbId) {
+        com.omdb.Movie omdbData = dao.getMovieById(imdbId);
+
+        String movieXml = convertMovieToXml(omdbData);
+
+        return movieXml;
+    }
+
+    /**
      * Convert movie to json string.
      *
      * @param omdbData the omdb data
@@ -124,6 +153,28 @@ public class DataAggregator {
         movieHtml += "</ul></ul>";
 
         return movieHtml;
+    }
+
+    /**
+     * Convert movie to xml string.
+     *
+     * @param omdbData the omdb data
+     * @return the xml string
+     */
+    public String convertMovieToXml(com.omdb.Movie omdbData) {
+        String movieXml = "";
+
+        XmlMapper xmlMapper = new XmlMapper();
+
+        Movie movie = convertOmdbDataToMovie(omdbData);
+
+        try {
+            movieXml = xmlMapper.writeValueAsString(movie);
+        } catch (JsonProcessingException e) {
+            logger.error(e);
+        }
+
+        return movieXml;
     }
 
 
