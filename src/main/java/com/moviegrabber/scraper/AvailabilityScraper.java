@@ -63,8 +63,10 @@ public class AvailabilityScraper {
      * @return the list
      */
     public Map<String, String> pullAvailability(String webPage) {
+
 //      Tests title
         Document doc = null;
+
         try {
             doc = Jsoup.connect(webPage).get();
         } catch(IOException e) {
@@ -74,17 +76,14 @@ public class AvailabilityScraper {
         Elements availability = doc.getElementsByClass("i3LlFf");
         Elements costOnPlatform = doc.getElementsByClass("V8xno");
 
-        logger.info(availability);
-
 //      Retrieves platforms from other section of page
-        if(availability.equals(null)) {
+        if(availability.isEmpty()) {
             availability = doc.getElementsByClass("hl");
             costOnPlatform = doc.getElementsByClass("ulLPN");
         }
 
 //      Retrieves available platform names
         List<String> platforms = availability.eachText();
-        logger.info(platforms);
 
 //      Retrieves available platform prices
         List<String> prices = costOnPlatform.eachText();
@@ -96,7 +95,6 @@ public class AvailabilityScraper {
             }
         }
 
-        logger.info(prices);
 
 //      Inserts prices into map
         Map<String, String> map = new HashMap<>();

@@ -27,7 +27,7 @@ public class MovieData {
     @GET
     @Produces("application/json")
     @Path("/title={param}")
-    public Response getMovieByTitle(@PathParam("param") String title) {
+    public Response getMovieJsonByTitle(@PathParam("param") String title) {
         String output =  movieGrabber.getMovieJsonByTitle(title);
 
         return Response.status(200).entity(output).build();

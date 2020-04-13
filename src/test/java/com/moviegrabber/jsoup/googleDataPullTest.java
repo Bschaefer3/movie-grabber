@@ -6,7 +6,6 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +20,7 @@ public class googleDataPullTest {
      * @throws IOException
      */
     @Test
-    public void getSidePlatformsTest() throws IOException {
+    public void getSidePlatformsTest() {
         AvailabilityScraper scraper = new AvailabilityScraper();
         Map<String, String> platforms = scraper.getAvailabilityByTitle("War of the Planet of the Apes", 2017);
 
@@ -34,11 +33,18 @@ public class googleDataPullTest {
      * @throws IOException
      */
     @Test
-    public void getTopPlatformsTest() throws IOException {
+    public void getTopPlatformsTest() {
         AvailabilityScraper scraper = new AvailabilityScraper();
         Map<String, String> platforms = scraper.getAvailabilityByTitle("Jumanji: The next level", 2019);
         logger.info("Platforms" + platforms);
         assertEquals(4, platforms.size());
+    }
+
+    @Test
+    public void getAvailabilityByTitleTest() {
+        AvailabilityScraper title = new AvailabilityScraper();
+        title.getAvailabilityByTitle("", 2009);
+
     }
 
 }
