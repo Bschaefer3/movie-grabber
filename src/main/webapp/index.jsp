@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Test Page</title>
+    <title>Movie Grabber</title>
 
     <script>
         const makeAJAXRequest = (url, callback, contentType) => {
@@ -34,9 +34,9 @@
             })
         }
 
-        const jsonFromServer = () => {
+        const jsonFromServer = (parameter = "imdbid=tt3659388") => {
 
-            let url = "/movie_grabber_war/movie/The+Martian";
+            let url = "/movie_grabber_war/movie/" + parameter;
             const callback = data => {
                 data = JSON.parse(data);
                 console.table(data);
@@ -45,9 +45,9 @@
 
         }
 
-        const htmlFromServer = () => {
+        const htmlFromServer = (parameter = "imdbid=tt3659388") => {
 
-            let url = "/movie_grabber_war/movie/The+Martian";
+            let url = "/movie_grabber_war/movie/" + parameter;
             const callback = data => {
                 console.log(data);
             }
@@ -55,9 +55,31 @@
 
         }
 
+        const xmlFromServer = (parameter = "imdbid=tt3659388") => {
+
+            let url = "/movie_grabber_war/movie/" + parameter;
+            const callback = data => {
+                console.log(data);
+            }
+            makeAJAXRequest(url, callback, 'text/xml');
+
+        }
+
+        const plainTextFromServer = (parameter = "imdbid=tt3659388") => {
+
+            let url = "/movie_grabber_war/movie/" + parameter;
+            const callback = data => {
+                console.log(data);
+            }
+            makeAJAXRequest(url, callback, 'text/plain');
+
+        }
+
     </script>
 </head>
 <body>
-<a href="movie/The+Martian">Get movie data</a>
+<a href="https://github.com/Bschaefer3/movie-grabber">Link to Github</a>
+<a href="https://app.swaggerhub.com/apis-docs/Bschaefer3/movie-grabber/1.0.0">Link to API Documentation</a>
+<a href="movie/title=The+Martian">Get movie data</a>
 </body>
 </html>
