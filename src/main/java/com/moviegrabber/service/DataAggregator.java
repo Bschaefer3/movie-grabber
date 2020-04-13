@@ -108,6 +108,34 @@ public class DataAggregator {
     }
 
     /**
+     * Gets movie string by title.
+     *
+     * @param title the title
+     * @return the movie string
+     */
+    public String getMoviePlainTextByTitle(String title) {
+        com.omdb.Movie omdbData = dao.getMovieByTitle(title);
+
+        String movie = convertMovieToPlainText(omdbData);
+
+        return movie;
+    }
+
+    /**
+     * Gets movie string by imdb id.
+     *
+     * @param imdbId the imdb id
+     * @return the movie string
+     */
+    public String getMoviePlainTextByImdbId(String imdbId) {
+        com.omdb.Movie omdbData = dao.getMovieById(imdbId);
+
+        String movie = convertMovieToPlainText(omdbData);
+
+        return movie;
+    }
+
+    /**
      * Convert movie to json string.
      *
      * @param omdbData the omdb data
@@ -175,6 +203,22 @@ public class DataAggregator {
         }
 
         return movieXml;
+    }
+
+    /**
+     * Convert movie to plain text string.
+     *
+     * @param omdbData the omdb data
+     * @return the plain text string
+     */
+    public String convertMovieToPlainText(com.omdb.Movie omdbData) {
+        String movieString = "";
+
+        Movie movie = convertOmdbDataToMovie(omdbData);
+
+        movieString = movie.toString();
+
+        return movieString;
     }
 
 
