@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 /**
  * Processes api requests to get movie data
  */
-@Path("/movie")
+@Path("/movies")
 public class MovieData {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
