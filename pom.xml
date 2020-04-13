@@ -52,19 +52,6 @@
             <artifactId>javaee-web-api</artifactId>
             <version>${javax.version}</version>
         </dependency>
-        <!--
-         https://mvnrepository.com/artifact/mysql/mysql-connector-java
-        -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-            <version>${jstl-version}</version>
-        </dependency>
         <!--  next 2 dependencies are for log4j  -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
