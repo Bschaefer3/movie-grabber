@@ -112,4 +112,19 @@ public class Movie {
     public void setYear(String year) {
         this.year = year;
     }
+
+    @Override
+    public String toString() {
+        String result = title + " was released in " + year + " and is available on: ";
+
+        for (Map.Entry<String, String> service: availability.entrySet()) {
+            if (!service.getValue().equals("Unknown") && !service.getValue().equals("Subscription")) {
+                result += service.getKey() + " for $" + service.getValue() + "; ";
+            } else if (service.getValue().equals("Subscription")) {
+                result += service.getKey() + " with Subscription; ";
+            }
+        }
+
+        return result;
+    }
 }
