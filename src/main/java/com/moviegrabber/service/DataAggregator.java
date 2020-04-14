@@ -231,13 +231,15 @@ public class DataAggregator {
     public Movie convertOmdbDataToMovie(com.omdb.Movie omdbData) {
         Movie movie = new Movie();
 
-        movie.setTitle(omdbData.getTitle());
-        movie.setImdbID(omdbData.getImdbID());
-        movie.setYear(omdbData.getYear());
+        if (omdbData.getTitle() != null) {
+            movie.setTitle(omdbData.getTitle());
+            movie.setImdbID(omdbData.getImdbID());
+            movie.setYear(omdbData.getYear());
 
-        Map<String, String> pricing = availability.getAvailabilityByTitle(movie.getTitle(), movie.getYear());
+            Map<String, String> pricing = availability.getAvailabilityByTitle(movie.getTitle(), movie.getYear());
 
-        movie.updateAvailability(pricing);
+            movie.updateAvailability(pricing);
+        }
 
         return movie;
     }
