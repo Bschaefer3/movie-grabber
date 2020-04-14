@@ -148,10 +148,14 @@ public class DataAggregator {
 
         Movie movie = convertOmdbDataToMovie(omdbData);
 
-        try {
-            movieJson = mapper.writeValueAsString(movie);
-        } catch (JsonProcessingException e) {
-            logger.error(e);
+        if (movie.getTitle() != null) {
+            try {
+                movieJson = mapper.writeValueAsString(movie);
+            } catch (JsonProcessingException e) {
+                logger.error(e);
+            }
+        } else {
+            movieJson = "{\"Response\": \"Could not find movie\"}";
         }
 
         return movieJson;
@@ -165,20 +169,26 @@ public class DataAggregator {
      */
     public String convertMovieToHtml(com.omdb.Movie omdbData) {
         Movie movie = convertOmdbDataToMovie(omdbData);
+        String movieHtml;
 
-        String movieHtml = "<ul>";
+        if (movie.getTitle() != null) {
+            movieHtml = "<ul>";
 
-        movieHtml += "<li>Title: " + movie.getTitle() + "</li>";
-        movieHtml += "<li>Year: " + movie.getYear() + "</li>";
-        movieHtml += "<li>IMDB ID: " + movie.getImdbID() + "</li>";
-        movieHtml += "<li>Availability:</li>";
-        movieHtml += "<ul>";
+            movieHtml += "<li>Title: " + movie.getTitle() + "</li>";
+            movieHtml += "<li>Year: " + movie.getYear() + "</li>";
+            movieHtml += "<li>IMDB ID: " + movie.getImdbID() + "</li>";
+            movieHtml += "<li>Availability:</li>";
+            movieHtml += "<ul>";
 
-        for (Map.Entry<String, String> entry : movie.getAvailability().entrySet()) {
-            movieHtml += "<li>" + entry.getKey() + ": " + entry.getValue() + "</li>";
+            for (Map.Entry<String, String> entry : movie.getAvailability().entrySet()) {
+                movieHtml += "<li>" + entry.getKey() + ": " + entry.getValue() + "</li>";
+            }
+
+            movieHtml += "</ul></ul>";
+        } else {
+            movieHtml = "<ul>Could not find movie</ul>";
         }
 
-        movieHtml += "</ul></ul>";
 
         return movieHtml;
     }
@@ -196,10 +206,14 @@ public class DataAggregator {
 
         Movie movie = convertOmdbDataToMovie(omdbData);
 
-        try {
-            movieXml = xmlMapper.writeValueAsString(movie);
-        } catch (JsonProcessingException e) {
-            logger.error(e);
+        if (movie.getTitle() != null) {
+            try {
+                movieXml = xmlMapper.writeValueAsString(movie);
+            } catch (JsonProcessingException e) {
+                logger.error(e);
+            }
+        } else {
+            movieXml = "<Movie>Could not find movie</Movie>";
         }
 
         return movieXml;
@@ -216,7 +230,11 @@ public class DataAggregator {
 
         Movie movie = convertOmdbDataToMovie(omdbData);
 
-        movieString = movie.toString();
+        if (movie.getTitle() != null) {
+            movieString = movie.toString();
+        } else {
+            movieString = "Could not find movie";
+        }
 
         return movieString;
     }
@@ -231,13 +249,15 @@ public class DataAggregator {
     public Movie convertOmdbDataToMovie(com.omdb.Movie omdbData) {
         Movie movie = new Movie();
 
-        movie.setTitle(omdbData.getTitle());
-        movie.setImdbID(omdbData.getImdbID());
-        movie.setYear(omdbData.getYear());
+        if (omdbData.getTitle() != null) {
+            movie.setTitle(omdbData.getTitle());
+            movie.setImdbID(omdbData.getImdbID());
+            movie.setYear(omdbData.getYear());
 
-        Map<String, String> pricing = availability.getAvailabilityByTitle(movie.getTitle(), movie.getYear());
+            Map<String, String> pricing = availability.getAvailabilityByTitle(movie.getTitle(), movie.getYear());
 
-        movie.updateAvailability(pricing);
+            movie.updateAvailability(pricing);
+        }
 
         return movie;
     }
